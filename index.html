@@ -1,0 +1,298 @@
+<HTML>
+
+  <head>
+      <title>Video Downloader - 7yasin</title>
+      <link rel="shortcut icon" href="/icon.ico" type="image/x-icon">
+   
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="stylesheet" href="assets/css/main.css" />
+      <script src="https://code.jquery.com/jquery-3.5.1.js"
+          integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+  
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/additional-methods.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/additional-methods.min.js"></script>
+      <script data-ad-client="ca-pub-5462874206413873" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  </HEAD>
+  
+  
+  <body>
+  
+
+      <div class="container">
+          <header class="major">
+              <h2>VİDEO DOWNLOADER</h2>
+          </header>
+  
+          <form name="donusturmeFormu" id="donusturmeFormu" name="">
+            <h2>Video site to download</h2>
+  
+            <select type="text" name="site"  class="form-control formte" id="site" onchange="sayfaDegistir()">
+              <option value="0">- Video Site -</option>
+              <option value="1">▶️ YouTube</option>
+              <option value="2">🐦 Twitter</option>
+              <option value="3">👍 Facebook</option>
+              <option value="4">🎵 TikTok</option>
+              <option value="5">💬 Twitch</option>
+              
+              
+  
+          </select>
+  
+            <br> <br>
+          <div class="urlkisim">
+
+          </div>   
+
+              <br> <br>
+              <h2>Format To Convert</h2>
+  
+  
+              <select type="text" name="sistem"  class="form-control formte" id="sistem">
+                <option value="0">- Video Format -</option>
+                <option value="mp3">MP3 (MUSİC)</option>
+                <option value="mp4a">144p (VİDEO)</option>
+                <option value="360">360p (VİDEO)</option>
+                <option value="480">480p (VİDEO)</option>
+                <option value="720">720p (VİDEO)</option>
+                <option value="1080">1080p (VİDEO)</option>
+                <option value="4k">4k (VİDEO)</option>
+                <option value="8k">8k (VİDEO)</option>
+  
+            </select>
+  
+  
+              <br>
+              <div class="form-group mt-4 download-video">
+                <INPUT type="button"  class="button special fit" NAME="button" Value="Download" onclick="downloadVideo(form.inputbox.value, form.sistem.value)">
+        </div>
+        <INPUT type="button" class="button default fit" NAME="button" Value="Refresh" onclick="location.reload()">
+    
+          <p>prepared by <a style="text-decoration: none;" href="https://www.github.com/7yasin">7yasin</a> and shared publicly on GitHub.</p>
+    <br/>
+          </form>
+      </div>
+
+<p>is the site taking your eye?</p>
+<a onclick="mode()" class="btn effect04" data-sm-link-text="DEĞİŞTİR" target="_blank"><span>🌙 LIGHTS</span></a>
+
+<br>
+<br>
+
+  </body>
+  
+  <script>
+    $.validator.addMethod('notEqualToString', function (value, element, param) {
+        if (value == param) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }, "Select the format in which the video will be converted; This field cannot be left blank!");
+  
+    $.validator.addMethod('videoCheck', function (value, element, param) {
+    let verilenSite =  $("#site").val()
+    let çıkan = value
+  
+  
+  if(verilenSite == 1 && !çıkan.includes("youtube")) return false;
+  if(verilenSite == 1 && çıkan.includes("youtube")) return true;
+  
+  if(verilenSite == 2 && !çıkan.includes("twitter")) return false;
+  if(verilenSite == 2 && çıkan.includes("twitter")) return true;
+  
+  if(verilenSite == 3 && !çıkan.includes("facebook")) return false;
+  if(verilenSite == 3 && çıkan.includes("facebook")) return true;
+  
+  if(verilenSite == 4 && !çıkan.includes("tiktok")) return false;
+  if(verilenSite == 4 && çıkan.includes("tiktok")) return true;
+
+  if(verilenSite == 2 && !çıkan.includes("twitch")) return false;
+  if(verilenSite == 2 && çıkan.includes("twitch")) return true;
+
+    }, "Specify a correct address URL.");
+  
+    $.validator.addMethod('araCheck', function (value, element, param) {
+    let url =  $("#inputbox").val()
+    let arama =  $("#ara").val()
+    
+if(!url && arama) return true;
+if(!url && !arama) return false;
+
+    }, "Or type the video you want from this section and press the 'Search Video' button");
+     
+    $.validator.addMethod('insta', function (value, element, param) {
+    let verilenSite =  $("#site").val()
+    let çıkan = value
+  
+  
+  if(verilenSite == 6) return false;
+else return true;
+
+    }, "Unfortunately, the system does not currently support the Instagram service. - VERY SOON -"); 
+  
+    $(document).ready(function () {
+        $("#donusturmeFormu").validate({
+  
+            rules: {
+                link: {
+                    required: true,
+                    url: true,
+                    videoCheck: true,
+                },
+                site: {
+                    required: true,
+                    notEqualToString: '0',   
+                    insta: true               
+                },
+                sistem: {
+                    required: true,
+                    notEqualToString: '0',   
+             },
+             ara: {
+                    araCheck: true,
+             },
+            },
+            messages: {
+                link:
+                {
+                    required: "⚠️ Paste the URL of the video you will download here,",
+                    url: "⚠️ You entered an incorrect URL format, make sure the video download site at the top is correct.",
+                },
+                site: {
+                    required: "⚠️ You must specify the site of the video you will download in this section.",
+                    notEqualToString: "⚠️ You must specify the site of the video you will download in this section.",
+                    insta: "⚠️ Unfortunately, the system does not currently support the Instagram service. - VERY SOON -",
+
+                  },
+                  sistem: {
+                  required: "⚠️ Select the format in which the video will be converted; This field cannot be left blank!",
+                  notEqualToString: "⚠️ Select the format in which the video will be converted; This field cannot be left blank!"
+                  
+                  },
+                  ara: {
+
+                  }
+            }
+        }
+        );
+  
+    });
+    function youtubeBilgisi() {
+   
+  
+      var video = document.getElementById("inputbox").value;
+     var videoID = video.substr(video.length - 11);
+      const apiKey = "" // WRITE HERE YOUR YOUTUBE V3 API KEY
+   
+     
+     fetch(`https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id=${videoID}&key=`+apiKey).then((resp) => resp.json())
+  .then(function(data) {
+  
+  if(!data.items[0]) return
+  
+  var baslık = data.items[0].snippet.title;
+
+  $('.urlkisim').html(`
+<h2>VIDEO TO DOWNLOAD:</h2>
+<INPUT type="text" name="link" id="inputbox" class="form-control link" VALUE="${baslık+" - "+data.items[0].id}" placeholder="${baslık}" disabled>
+
+`);
+
+  
+ })
+
+
+}
+
+function youtubeAra() {
+
+    var aranacak = document.getElementById("ara").value;
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q=${aranacak}&type=video&key=AIzaSyBcidrvuezqIZl1i6IVrL-W7VmNLfMaiT4`).then((resp) => resp.json())
+  .then(function(data) {
+    
+let video = data.items[0]
+$('.urlkisim').html(`
+<h2>VIDEO TO DOWNLOAD:</h2>
+<INPUT type="text" name="link" id="inputbox" class="form-control link" VALUE="${video.snippet.title+" - "+video.id.videoId}" placeholder="${video.snippet.title}" disabled>
+
+`);
+
+    
+  })
+  }
+
+function downloadVideo(link,fromate) {
+      var isValid = $("#donusturmeFormu").valid();
+if ($("#donusturmeFormu").valid()) {
+  let verilenSite = $("#site").val()
+
+if(verilenSite == 1) link = "https://www.youtube.com/watch?v="+link.substr(link.length - 11);
+
+
+
+$('.download-video').html('<iframe style="width:100%;height:60px;border:0;overflow:hidden;" scrolling="no" src="https://loader.to/api/button/?url='+link+'&f='+fromate+'&color=F44066"></iframe>');  
+}
+    }
+
+function sayfaDegistir() {
+let verilenSite = $("#site").val()
+
+if(verilenSite == 0) return;
+
+if(verilenSite == 1) {
+
+  $('.urlkisim').html(`
+  <h2>YOUTUBE VIDEO TO DOWNLOAD</h2>
+
+<INPUT type="text" name="link" id="inputbox" class="form-control link" VALUE="" placeholder="Video URL" oninput="youtubeBilgisi()">
+<br>
+<h2>OR</h2>
+<INPUT type="text" name="ara" id="ara" class="form-control link" VALUE="" placeholder="Search for a video on YouTube." oninput="youtubeBilgisi()">
+<br> 
+<INPUT type="button" class="button default" NAME="button" Value="SEARCH VİDEO" onclick="youtubeAra()">
+
+`);
+
+} else {
+
+
+let seçilenSite;
+if(verilenSite == 2) seçilenSite = "TWITTER VIDEO TO DOWNLOAD"
+if(verilenSite == 3) seçilenSite = "FACEBOOK VIDEO TO DOWNLOAD"
+if(verilenSite == 4) seçilenSite = "TIKTOK VIDEO TO DOWNLOAD"
+if(verilenSite == 5) seçilenSite = "TWITCH VIDEO TO DOWNLOAD"
+
+$('.urlkisim').html(`
+  <h2>${seçilenSite}</h2>
+
+<INPUT type="text" name="link" id="inputbox" class="form-control link" VALUE="" placeholder="Video URL" oninput="youtubeBilgisi()">
+<br>
+
+
+
+`);
+
+
+
+}
+
+  }
+
+  function mode() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+
+}
+
+  </script>
+    
+  
+  
+  
+  
+  </HTML>
+  

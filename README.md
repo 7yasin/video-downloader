@@ -25,4 +25,4 @@ It allows you to download content from services such as Twitter, YouTube, TikTok
 
 ## Project Info
 <h5>Project Date: 2018</h5>
-<h5>Lisance: MIT</h5>
+<h5>License: MIT</h5>
